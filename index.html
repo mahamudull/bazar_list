@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazar List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bazar List</h1>
+        <div class="input-group">
+            <input type="text" id="item" placeholder="Add new item" />
+            <button id="add-item-btn">Add</button>
+        </div>
+        <ul id="item-list">
+            <!-- List items will be added here dynamically -->
+        </ul>
+    </div>
+
+    <script>
+        // Function to add a new item to the list
+        function addItem() {
+            const itemInput = document.getElementById('item');
+            const itemText = itemInput.value.trim();
+
+            if (itemText !== '') {
+                const li = document.createElement('li');
+                li.textContent = itemText;
+
+                // Create delete button for each item
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                li.appendChild(deleteBtn);
+
+                // Append the new item to the list
+                document.getElementById('item-list').appendChild(li);
+
+                // Clear the input field
+                itemInput.value = '';
+
+                // Add event listener for the delete button
+                deleteBtn.addEventListener('click', function() {
+                    li.remove();
+                });
+            }
+        }
+
+        // Event listener for the Add button
+        document.getElementById('add-item-btn').addEventListener('click', addItem);
+
+        // Allow pressing Enter to add an item
+        document.getElementById('item').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addItem();
+            }
+        });
+    </script>
+</body>
+</html>
